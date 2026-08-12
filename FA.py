@@ -3,7 +3,7 @@ from pydantic import BaseModel
 import uvicorn
 
 
-class Sumy(Basemodel):
+class Sumy(BaseModel):
     a: int
     b: int    
 
