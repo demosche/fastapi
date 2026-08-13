@@ -1,7 +1,12 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
+
+API_KEY = os.getenv('key')
 
 class Sumy(BaseModel):
     a: int
