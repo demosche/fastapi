@@ -1,11 +1,23 @@
 FROM python:3.11-slim
-WORKDIR /app
-RUN apt-get update && apt-get install -y curl && \
-    curl -LsSf https://astral.sh/uv/install.sh | sh && \
-    apt-get remove -y curl && apt-get autoremove -y && \
-    rm -rf /var/lib/apt/lists/*
-ENV PATH="/root/.local/bin:${PATH}"
-COPY requirements.txt .
-RUN uv pip install -r requirements.txt
+ENV PYTHONUNBUFFERED=1
+
+# Install uv
+# Ref: https://docs.astral.sh/uv/guides/integration/docker/#installing-uv
+COPY --from=ghcr.io/astral-sh/uv:0.9.26 /uv /uvx /bin/
+
+# Compile bytecode
+# Ref: https://docs.astral.sh/uv/guides/integration/docker/#compiling-bytecode
+ENV UV_COMPILE_BYTECODE=1
+
+# uv Cache
+# Ref: https://docs.astral.sh/uv/guides/integration/docker/#caching
+ENV UV_LINK_MODE=copy
+
+WORKDIR /app/
+
+# Place executables in the environment at the front of the path
+# Ref: https://docs.astral.sh/uv/guides/integration/docker/#using-the-environment
+ENV PATH="/app/.venv/bin:$PATH"
+RUN uv sync --frozen --no-install-workspace --package app
 COPY FA.py .
 CMD ["python", "FA.py"]
