@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   fastapi:
     build: .
@@ -11,3 +9,12 @@ services:
     environment:
       - key=${key}
     restart: unless-stopped
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
+          ignore:
+            - .venv/
+            - __pycache__/
+            - .uv/
