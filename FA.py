@@ -32,4 +32,4 @@ async def summyPost(sum:Sumy):
     return {"return": sum.a + sum.b}
 
 if __name__ == "__main__":
-    uvicorn.run("FA:app", host="192.168.1.142", port=47989, reload=True)
+    uvicorn.run("FA:app", host="0.0.0.0", port=8000, reload=True)

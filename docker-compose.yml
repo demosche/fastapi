@@ -2,13 +2,12 @@ services:
   fastapi:
     build: .
     container_name: fastapi-app
-    ports:
-      - "8000:8000"
     env_file:
       - .env
     environment:
       - key=${key}
     restart: unless-stopped
+
     develop:
       watch:
         - action: sync
@@ -18,3 +17,16 @@ services:
             - .venv/
             - __pycache__/
             - .uv/
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    depends_on:
+      - fastapi
+    restart: unless-stopped
