@@ -1,16 +1,16 @@
 server {
     listen 80;
-    server_name fas.4100000.xyz;
+    server_name ${DOMAIN};
 
     return 301 https://$host$request_uri;
 }
 
 server {
     listen 443 ssl;
-    server_name fas.4100000.xyz;
+    server_name ${DOMAIN};
 
-    ssl_certificate /etc/letsencrypt/live/fas.4100000.xyz/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/fas.4100000.xyz/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/${DOMAIN}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/${DOMAIN}/privkey.pem;
 
     location / {
         proxy_pass http://fastapi-app:8000;
