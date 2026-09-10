@@ -2,20 +2,28 @@
 
 set -e
 
-echo "Build"
+echo "building"
 
 sudo docker compose up -d --build fastapi
 
-echo "Stop Nginx"
+echo "build"
+
+echo "stopping nginx"
 
 sudo docker compose stop nginx
 
-echo "Run Certbot"
+echo "nginx is stop"
+
+echo "running certbot"
 
 ./certbot.sh
 
-echo "Start Nginx"
+echo "certbot is running"
 
-sudo docker compose up -d
+echo "starting nginx"
 
-echo "Done"
+sudo docker compose up -d nginx
+
+echo "nginx is ready"
+
+echo "done"
