@@ -46,5 +46,5 @@ services:
     container_name: certbot
 
     volumes:
-      - ./cert:/etc/letsencrypt
+      - ./cert/live:/etc/letsencrypt
       - ./cert:/var/lib/letsencrypt

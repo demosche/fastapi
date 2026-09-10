@@ -31,6 +31,7 @@ docker compose run --rm certbot \
     --work-dir /var/lib/letsencrypt \
     --logs-dir /var/lib/letsencrypt/log \
     -d "$DOMAIN"
+sudo docker compose run --rm certbot certonly --test-cert --standalone --preferred-challenges http --agree-tos --no-eff-email --config-dir /etc/letsencrypt --work-dir /var/lib/letsencrypt --logs-dir /var/lib/letsencrypt/log -d fassek.4100000.xyz
 
 STATUS=$?
 
