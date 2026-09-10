@@ -1,3 +1,5 @@
-sudo docker compose run --rm certbot certonly --test-cert --standalone --preferred-challenges http --agree-tos --register-unsafely-without-email --cert-name fassek.4100000.xyz --config-dir /etc/letsencrypt --work-dir /var/lib/letsencrypt --logs-dir /var/lib/letsencrypt/log -d fassek.4100000.xyz
+sudo docker compose run --rm -d -p 80:80 certbot certonly --test-cert --standalone --preferred-challenges http --agree-tos --register-unsafely-without-email --cert-name fassek.4100000.xyz --config-dir /etc/letsencrypt --work-dir /var/lib/letsencrypt --logs-dir /var/lib/letsencrypt/log -d fassek.4100000.xyz -n
+
+sudo docker compose run --rm certbot certonly --test-cert --force-renewal --standalone --preferred-challenges http --agree-tos --register-unsafely-without-email --cert-name fassek.4100000.xyz --config-dir /etc/letsencrypt --work-dir /var/lib/letsencrypt --logs-dir /var/lib/letsencrypt/log -d fassek.4100000.xyz
 
 sudo docker compose run --rm certbot certonly --test-cert --standalone --preferred-challenges http --agree-tos --no-eff-email --config-dir /etc/letsencrypt --work-dir /var/lib/letsencrypt --logs-dir /var/lib/letsencrypt/log -d fassek.4100000.xyz
